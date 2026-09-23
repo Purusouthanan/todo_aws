@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium To-Do App</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="app-container">
+        <header>
+            <h1>My Tasks</h1>
+            <div class="progress-container">
+                <svg class="progress-ring" width="50" height="50">
+                    <circle class="progress-ring__circle-bg" stroke="rgba(255, 255, 255, 0.1)" stroke-width="4" fill="transparent" r="20" cx="25" cy="25"/>
+                    <circle class="progress-ring__circle" stroke="#a78bfa" stroke-width="4" fill="transparent" r="20" cx="25" cy="25"/>
+                </svg>
+                <span class="progress-text" id="progressText">0%</span>
+            </div>
+        </header>
+
+        <form id="todoForm" class="input-section">
+            <div class="input-group">
+                <div class="input-wrapper">
+                    <i class="ph ph-plus"></i>
+                    <input type="text" id="todoInput" placeholder="Add a new task..." autocomplete="off" required>
+                </div>
+                <div class="input-wrapper time-wrapper">
+                    <i class="ph ph-clock"></i>
+                    <input type="datetime-local" id="todoTime" title="Optional due date/time">
+                </div>
+            </div>
+            <button type="submit" class="add-btn">Add</button>
+        </form>
+
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="active">Active</button>
+            <button class="filter-btn" data-filter="completed">Completed</button>
+        </div>
+
+        <div class="list-container">
+            <ul id="todoList" class="todo-list">
+                <!-- Tasks will be injected here via JS -->
+            </ul>
+            <div id="emptyState" class="empty-state">
+                <i class="ph ph-list-dashes"></i>
+                <p>No tasks found. Start adding some!</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

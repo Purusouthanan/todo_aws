@@ -1,0 +1,20 @@
+graph TD
+    A[Developer / Git Push] --> B[Jenkins CI/CD Pipeline]
+    B --> C[1. Terraform: Provision Minikube Cluster]
+    B --> D[2. Docker Build: todo-app:latest]
+    D --> E[3. Minikube Load: Load Docker Image into Cluster]
+    E --> F[4. Kubernetes: Apply Deployment & Service]
+    F --> G[5. Ansible: Apply Configuration]
+    G --> H[6. Verification: Health Checks & Env Injections]
+    H --> I(🚀 Live Todo Application)
+
+    classDef default fill:#1e1e1e,stroke:#333,stroke-width:1px,color:#fff;
+    style A fill:#2d2d2d
+    style B fill:#2d2d2d
+    style C fill:#2d2d2d
+    style D fill:#2d2d2d
+    style E fill:#2d2d2d
+    style F fill:#2d2d2d
+    style G fill:#2d2d2d
+    style H fill:#2d2d2d
+    style I fill:#2d2d2d

@@ -1,0 +1,37 @@
+---
+- name: Setup Jenkins in Docker
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Ensure Jenkins volume exists
+      command: docker.exe volume create jenkins_home
+      ignore_errors: yes
+
+    - name: Run Jenkins container
+      command: >
+        docker.exe run -d 
+        --name jenkins 
+        --restart unless-stopped 
+        -p 8080:8080 
+        -p 50000:50000 
+        -v jenkins_home:/var/jenkins_home 
+        -v //var/run/docker.sock:/var/run/docker.sock 
+        -u root
+        jenkins/jenkins:lts-jdk17
+      ignore_errors: yes # Ignores error if container name already exists
+
+    - name: Wait for Jenkins to generate initial password
+      pause:
+        seconds: 15
+
+    - name: Get initial admin password
+      command: docker.exe exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+      register: jenkins_password
+
+    - name: Display Jenkins Admin Password
+      debug:
+        msg: 
+          - "======================================================="
+          - "Jenkins is starting at http://localhost:8080"
+          - "Your Jenkins initial admin password is: {{ jenkins_password.stdout }}"
+          - "======================================================="
